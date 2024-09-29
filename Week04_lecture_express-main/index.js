@@ -7,16 +7,33 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 })
 
-app.get('/about', (req, res) =>{
-    res.send('About Us')
+app.get('/hello', (req, res) =>{
+    res.send('Hello Express JS')
 }) 
 
-// http://localhost:3000/
-app.post('/', (req, res) => {
-    res.send('POST - Hello World');
-})
+app.get('/user', (req, res) => {
 
-// Listen to the server
+    const { firstname = 'Pritesh', lastname = 'Patel' } = req.query;
+    
+    const response = {
+        firstname,
+        lastname
+    };
+
+    res.json(response);
+});
+
+app.post('/user/:firstname/:lastname', (req, res) => {
+    const { firstname, lastname } = req.params;
+
+    const response = {
+        firstname,
+        lastname
+    };
+
+    res.json(response);
+});
+
 app.listen(SERVER_PORT, () => {
     console.log(`Server is running on http://localhost:${SERVER_PORT}`);
 })
